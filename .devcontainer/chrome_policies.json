@@ -1,0 +1,20 @@
+{
+    "DefaultBrowserSettingEnabled": false,
+    "UrlKeyedAnonymizedDataCollectionEnabled": false,
+    "MetricsReportingEnabled": false,
+    "BackgroundModeEnabled": false,
+    "RestoreOnStartup": 1,
+    "BookmarkBarEnabled": true,
+    "HighEfficiencyModeEnabled": true,
+    "MemorySaverModeSavings": 1,
+    "SafeBrowsingProtectionLevel": 0,
+    "PrivacySandboxPromptEnabled": false,
+    "PrivacySandboxSiteEnabledAdsEnabled": false,
+    "PrivacySandboxAdTopicsEnabled": false,
+    "PrivacySandboxAdMeasurementEnabled": false,
+    "HomepageIsNewTabPage": false,
+    "HomepageLocation": "https://www.google.com",
+    "NetworkPredictionOptions": 1,
+    "ExtensionDeveloperModeSettings": 1,
+    "BlockThirdPartyCookies": true
+}

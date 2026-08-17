@@ -1,0 +1,35 @@
+{
+    "build": {
+        "dockerfile": "./Containerfile",
+        "context": "."
+    },
+    "postStartCommand": "/usr/local/bin/start.sh",
+    "runArgs": [
+        "--shm-size=2g",
+        "--tmpfs",
+        "/tmp",
+        "--tmpfs",
+        "/run"
+    ],
+    "mounts": [
+        "source=${localEnv:HOME}/chrome-data,target=/home/chromer,type=bind,consistency=cached"
+    ],
+    "remoteUser": "chromer",
+    "workspaceFolder": "/home/chromer",
+    "containerUser": "chromer",
+    "forwardPorts": [
+        6901,
+        5901
+    ],
+    "portsAttributes": {
+        "6901": {
+            "label": "Google Chrome",
+            "onAutoForward": "ignore"
+        },
+        "5901": {
+            "label": "VNC Server",
+            "onAutoForward": "ignore"
+        }
+    },
+    "customizations": {}
+}

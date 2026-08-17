@@ -1,0 +1,49 @@
+FROM debian:trixie-slim
+
+# Define environment variables
+ARG DEBIAN_FRONTEND=noninteractive
+
+COPY ./start.sh /usr/local/bin/start.sh
+COPY ./chrome_policies.json /tmp/chrome_policies.json
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    dbus-x11 \
+    fonts-noto \
+    git \
+    gnupg \
+    novnc \
+    openbox \
+    sudo \
+    tigervnc-standalone-server \
+    unzip \
+    websockify \
+    xterm \
+    zip \
+    # Copy Start Script
+    && chmod +x /usr/local/bin/start.sh \
+    # Install Google Chrome
+    && curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /etc/apt/keyrings/google-archive-keyring.gpg \
+    && echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends google-chrome-stable \
+    && mv /usr/bin/google-chrome-stable /usr/bin/google-chrome-stable.real \
+    && echo '#!/bin/bash\n/usr/bin/google-chrome-stable.real --no-sandbox "$@"' > /usr/bin/google-chrome-stable \
+    && chmod +x /usr/bin/google-chrome-stable \
+    # Copy Google Chrome Policy
+    && mkdir -p /etc/opt/chrome/policies/managed \
+    && mv /tmp/chrome_policies.json /etc/opt/chrome/policies/managed/chrome_policies.json \
+    && chmod 644 /etc/opt/chrome/policies/managed/chrome_policies.json \
+    # Clean up
+    && apt-get autoremove -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN groupadd --gid 1000 chromer \
+    && useradd --uid 1000 --gid chromer --shell /bin/bash -m chromer \
+    && echo "chromer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/chromer-sudo \
+    && chmod 0440 /etc/sudoers.d/chromer-sudo
+
+USER chromer
