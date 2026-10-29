@@ -1,6 +1,10 @@
 # Chrome Codespaces Container
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/himanshu-mahendra-jain/chrome-codespaces-container)
+
 A containerized Google Chrome development environment designed specifically for **GitHub Codespaces** that runs in a VNC-enabled container with a web-based interface. This project provides a complete Chrome browser environment that can be accessed through any web browser, making it ideal for development, testing, and remote access scenarios within GitHub Codespaces.
+
+https://github.com/user-attachments/assets/d4ed1461-338b-41c4-9c82-7b44d2453908
 
 ## Features
 
@@ -38,7 +42,7 @@ This project uses a multi-layered approach:
 
 1. **Fork or clone the repository** to your GitHub account
 
-2. **Open in GitHub Codespaces**:
+2. **Open in GitHub Codespaces**: click the badge at the top of this README, or:
    - Navigate to the repository on GitHub
    - Click the green "Code" button
    - Select "Codespaces" tab
